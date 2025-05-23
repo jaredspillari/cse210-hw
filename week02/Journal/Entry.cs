@@ -16,6 +16,16 @@ public class Entry
     {
         return $"{_Date}|{_Prompt}|{_Response}";
     }
+    public static Entry FromFormattedEntry(string line)
+    {
+        string[] parts = line.Split('|');
+        return new Entry
+        {
+            _Date = parts[0],
+            _Prompt = parts[1],
+            _Response = parts[2]
+        };
+    }
 
 }
 

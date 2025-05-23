@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class randomGenerator
+public class RandomGenerator
 {
     public List<string> prompt = new List<string>
     {
@@ -14,7 +14,7 @@ public class randomGenerator
 
     private Random rand = new Random();
 
-    public string randomGeneratorprompt()
+    public string GetRandomPrompt()
     {
         int index = rand.Next(prompt.Count);
         return prompt[index];

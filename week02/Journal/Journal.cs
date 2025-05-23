@@ -4,7 +4,7 @@ using System.IO;
 
 public class Journal
 {
-    private List<Entry> entries;
+    private List<Entry> entries = new List<Entry>();
 
     public void AddEntry(Entry entry)
     {
@@ -15,6 +15,35 @@ public class Journal
         foreach (Entry entry in entries)
         {
             entry.Display();
+        }
+    }
+    public void SaveToFile(string filename)
+    {
+        using (StreamWriter writer = new StreamWriter(filename))
+        {
+            foreach (Entry entry in entries)
+            {
+                writer.WriteLine(entry.GetFormattedEntry());
+            }
+        }
+        Console.WriteLine("Journal saved successfully.");
+    }
+
+    public void LoadFromFile(string filename)
+    {
+        if (File.Exists(filename))
+        {
+            entries.Clear();
+            string[] lines = File.ReadAllLines(filename);
+            foreach (string line in lines)
+            {
+                entries.Add(Entry.FromFormattedEntry(line));
+            }
+            Console.WriteLine("Journal loaded successfully.");
+        }
+        else
+        {
+            Console.WriteLine("File not found.");
         }
     }
 }
